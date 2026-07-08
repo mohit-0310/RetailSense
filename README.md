@@ -1,3 +1,12 @@
+---
+title: RetailSense
+colorFrom: green
+colorTo: teal
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # RetailSense
 
 RetailSense is a local demo of an agentic retail inventory decision support workflow built on the M5 Forecasting dataset.

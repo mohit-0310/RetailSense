@@ -1,0 +1,11 @@
+[
+  {
+    "item_store_rows":30490,
+    "daily_tail_rows":3414880,
+    "weekly_context_rows":487840,
+    "high_priority":2319,
+    "medium_priority":6932,
+    "low_priority":21239,
+    "latest_sales_day":"d_1913"
+  }
+]

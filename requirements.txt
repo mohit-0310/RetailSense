@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pandas
+pyarrow
+python-dotenv
+openai
+openai-agents
+pytest

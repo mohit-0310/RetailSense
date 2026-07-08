@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.env
+prepared/
+m5-forecasting-accuracy/
+*.pyc

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RetailSense</title>
+    <link rel="stylesheet" href="/static/styles.css?v=20260708-5" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">RS</div>
+          <div>
+            <h1>RetailSense</h1>
+            <p>Agentic retail review</p>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Main navigation">
+          <button class="nav-item active" data-view="agent">Agent</button>
+          <button class="nav-item" data-view="today">Today's Review</button>
+          <button class="nav-item" data-view="store">Storewise Review</button>
+          <button class="nav-item" data-view="ask">Ask AI</button>
+        </nav>
+        <div class="boundary">
+          Human review only. RetailSense does not place orders or change prices.
+        </div>
+      </aside>
+
+      <main class="main">
+        <section id="agent-view" class="view active">
+          <div class="dashboard">
+            <section class="dashboard-hero">
+              <div class="hero-copy">
+                <span class="eyebrow">Decision support agent</span>
+                <h2>Retail inventory review, ready before the morning meeting.</h2>
+                <p>
+                  RetailSense combines sales, calendar, and price signals into a focused review queue
+                  so teams can spot demand movement faster and keep final decisions human-led.
+                </p>
+                <div class="dashboard-actions">
+                  <button class="primary-action" data-jump="today">
+                    <span class="button-icon">></span>
+                    Open Today's Review
+                  </button>
+                  <button class="secondary-action" data-jump="ask">
+                    <span class="button-icon">?</span>
+                    Ask AI
+                  </button>
+                </div>
+              </div>
+              <div id="dashboard-summary" class="dashboard-summary" aria-label="RetailSense summary"></div>
+            </section>
+
+            <section class="dashboard-section">
+              <div class="section-kicker">
+                <h3>Agent Pipeline</h3>
+                <p>Each specialist contributes one part of the final review prompt.</p>
+              </div>
+              <div class="pipeline" aria-label="RetailSense agent pipeline">
+                <div class="pipeline-step">
+                  <span class="step-icon">D</span>
+                  <strong>Demand</strong>
+                  <p>Compares recent movement with the baseline.</p>
+                </div>
+                <div class="pipeline-step">
+                  <span class="step-icon">E</span>
+                  <strong>Events</strong>
+                  <p>Checks event, weekend, and SNAP context.</p>
+                </div>
+                <div class="pipeline-step">
+                  <span class="step-icon">P</span>
+                  <strong>Price</strong>
+                  <p>Reviews price movement and response history.</p>
+                </div>
+                <div class="pipeline-step">
+                  <span class="step-icon">A</span>
+                  <strong>Action</strong>
+                  <p>Turns evidence into the next review step.</p>
+                </div>
+                <div class="pipeline-step orchestrator-step">
+                  <span class="step-icon">O</span>
+                  <strong>Orchestrator</strong>
+                  <p>Combines signals into one business answer.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="dashboard-section">
+              <div class="section-kicker">
+                <h3>What RetailSense Found</h3>
+                <p>
+                  Prepared from the
+                  <a
+                    class="inline-link"
+                    href="https://www.kaggle.com/competitions/m5-forecasting-accuracy"
+                    target="_blank"
+                    rel="noreferrer"
+                  >M5 Forecasting Accuracy dataset</a>.
+                </p>
+              </div>
+              <div id="dashboard-findings" class="finding-strip"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="today-view" class="view">
+          <div class="section-head">
+            <div>
+              <h2>Today's Review</h2>
+              <p>Start with high priority. Select an item when you want details.</p>
+            </div>
+            <div class="segmented" role="group" aria-label="Priority">
+              <button class="priority active" data-priority="high">High</button>
+              <button class="priority" data-priority="medium">Medium</button>
+              <button class="priority" data-priority="low">Low</button>
+            </div>
+          </div>
+          <div class="review-layout">
+            <div class="queue-panel">
+              <div class="queue-head">
+                <span id="today-count">Loading...</span>
+              </div>
+              <div id="today-list" class="queue-list"></div>
+              <div class="pager">
+                <button id="today-prev" title="Previous page" aria-label="Previous page">&lt;</button>
+                <span id="today-page">Page 1</span>
+                <button id="today-next" title="Next page" aria-label="Next page">&gt;</button>
+              </div>
+            </div>
+            <div id="today-detail" class="detail-panel empty">
+              <p>Select an item to review the recommendation.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="store-view" class="view">
+          <div class="section-head">
+            <div>
+              <h2>Storewise Review</h2>
+              <p>Review the same queue within one store.</p>
+            </div>
+            <div class="filters">
+              <select id="store-select" aria-label="Store"></select>
+              <select id="store-priority" aria-label="Priority">
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+          </div>
+          <div class="review-layout">
+            <div class="queue-panel">
+              <div class="queue-head">
+                <span id="store-count">Loading...</span>
+              </div>
+              <div id="store-list" class="queue-list"></div>
+              <div class="pager">
+                <button id="store-prev" title="Previous page" aria-label="Previous page">&lt;</button>
+                <span id="store-page">Page 1</span>
+                <button id="store-next" title="Next page" aria-label="Next page">&gt;</button>
+              </div>
+            </div>
+            <div id="store-detail" class="detail-panel empty">
+              <p>Select an item to review the recommendation.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="ask-view" class="view">
+          <div class="section-head">
+            <div>
+              <h2>Ask AI</h2>
+            </div>
+          </div>
+          <div class="chat-shell">
+            <div id="chat-output" class="chat-output" aria-live="polite"></div>
+            <form id="ask-form" class="ask-form">
+              <textarea
+                id="ask-input"
+                rows="3"
+                placeholder="Ask about a priority item, store, demand movement, or price signal..."
+              ></textarea>
+              <div class="chat-actions">
+                <button type="button" id="clear-chat" class="secondary">Clear</button>
+                <button type="submit">Send</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="/static/app.js?v=20260708-5"></script>
+  </body>
+</html>
